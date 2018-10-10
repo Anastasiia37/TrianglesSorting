@@ -6,8 +6,7 @@ namespace TrianglesSorting
     {
         public static int Main(string[] args)
         {
-            Validator validator = new Validator();
-            TrianglesSortingProgram program = new TrianglesSortingProgram(validator);
+            TrianglesSortingProgram program = new TrianglesSortingProgram();
             return program.Run(args);
         }
     }

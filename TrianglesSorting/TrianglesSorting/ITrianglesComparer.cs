@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace TrianglesSorting
 {
-    public interface ITrianglesComparer<T> : IComparer<T> where T : Triangle
+    public interface ITrianglesComparer : IComparer<Triangle> 
     {
-        new int Compare(T triangle1, T triangle2);
+        new int Compare(Triangle triangle1, Triangle triangle2);
     }
 }

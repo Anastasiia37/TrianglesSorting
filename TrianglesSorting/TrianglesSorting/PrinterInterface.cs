@@ -4,17 +4,18 @@ namespace TrianglesSorting
 {
     public interface IPrinter
     {
-        void Print(SetOfTriangles triangles);
+        void Print(ListOfTriangles triangles);
     }
 
     public class ConsolePrinter : IPrinter
     {
-        public void Print(SetOfTriangles triangles)
+        public void Print(ListOfTriangles  triangles)
         {
-            int i = 0;
+            int i = 1;
             foreach (Triangle triangle in triangles)
             {
-                Console.WriteLine(++i + ". " + triangle);
+                Console.WriteLine(triangle.ToString(i));
+                i++;
             }
         }
     }

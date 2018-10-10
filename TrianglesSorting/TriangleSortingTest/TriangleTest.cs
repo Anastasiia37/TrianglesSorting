@@ -25,7 +25,7 @@ namespace TriangleSortingTest
         public void Validator_StringParseTest()
         {
             //Arrange
-            Validator validator = new Validator();
+            TriangleValidator validator = new TriangleValidator();
             Triangle expected = new Triangle("qwe", 2.3f, 5, 6, new HeronsFormula());
 
             //Act

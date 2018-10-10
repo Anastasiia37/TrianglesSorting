@@ -43,15 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IGeometry.cs" />
     <Compile Include="InvalidArgumentException.cs" />
-    <Compile Include="HeronsFormula.cs" />
-    <Compile Include="IAreaSearchFormula.cs" />
     <Compile Include="ITrianglesComparer.cs" />
-    <Compile Include="SetOfTriangles.cs" />
+    <Compile Include="ListOfTriangles.cs" />
     <Compile Include="Triangle.cs" />
     <Compile Include="TrianglesComparerByAreaDESC.cs" />
     <Compile Include="TrianglesSortingProgram.cs" />
-    <Compile Include="Validator.cs" />
+    <Compile Include="TriangleValidator.cs" />
     <Compile Include="PrinterInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

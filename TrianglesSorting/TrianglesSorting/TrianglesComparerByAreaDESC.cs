@@ -2,9 +2,9 @@
 
 namespace TrianglesSorting
 {
-    public class TrianglesComparerByAreaDESC<T> : ITrianglesComparer<T> where T : Triangle
+    public class TrianglesComparerByAreaDESC : ITrianglesComparer 
     {
-        public int Compare(T triangle1, T triangle2)
+        public int Compare(Triangle triangle1, Triangle triangle2)
         {
             if (triangle2.Area - triangle1.Area < 0)
             {
