@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TrianglesSorting
+namespace TriangleModel
 {
     public interface ITrianglesComparer : IComparer<Triangle> 
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using TriangleModel;
 
 namespace TrianglesSorting
 {
@@ -6,8 +7,8 @@ namespace TrianglesSorting
     {
         public static int Main(string[] args)
         {
-            TrianglesSortingProgram program = new TrianglesSortingProgram();
-            return program.Run(args);
+            TrianglesSortingApplication myApplication = new TrianglesSortingApplication();
+            return myApplication.Run(args);
         }
     }
 }

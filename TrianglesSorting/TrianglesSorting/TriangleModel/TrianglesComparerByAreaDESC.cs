@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrianglesSorting
+namespace TriangleModel
 {
     public class TrianglesComparerByAreaDESC : ITrianglesComparer 
     {

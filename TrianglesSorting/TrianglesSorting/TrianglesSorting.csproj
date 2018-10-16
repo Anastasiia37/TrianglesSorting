@@ -43,15 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IGeometry.cs" />
-    <Compile Include="InvalidArgumentException.cs" />
-    <Compile Include="ITrianglesComparer.cs" />
-    <Compile Include="ListOfTriangles.cs" />
-    <Compile Include="Triangle.cs" />
-    <Compile Include="TrianglesComparerByAreaDESC.cs" />
-    <Compile Include="TrianglesSortingProgram.cs" />
+    <Compile Include="CommandLineException.cs" />
+    <Compile Include="TriangleModel\ConsoleTrianglePrinter.cs" />
+    <Compile Include="TriangleModel\IGeometry.cs" />
+    <Compile Include="TriangleModel\ITrianglesComparer.cs" />
+    <Compile Include="ReturnCode.cs" />
+    <Compile Include="TriangleModel\ListOfTriangles.cs" />
+    <Compile Include="TriangleModel\Triangle.cs" />
+    <Compile Include="TriangleModel\TrianglesComparerByAreaDESC.cs" />
+    <Compile Include="TriangleModel\InvalidTriangleException.cs" />
+    <Compile Include="TrianglesSortingApplication.cs" />
     <Compile Include="TriangleValidator.cs" />
-    <Compile Include="PrinterInterface.cs" />
+    <Compile Include="TriangleModel\ITrianglePrinter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

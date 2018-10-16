@@ -1,101 +1,106 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
+using TriangleModel;
 
 namespace TrianglesSorting
 {
     public static class TriangleValidator
     {
-        const int PARAMETERS_COUNT = 4;
-        public static Triangle Parse(string[] args)
-        {
-            if (args.Length == 0)
-            {
-                ShowInstruction();
-                throw new InvalidArgumentException("Please, add arguments");
-            }
-            else
-            {
-                if (args.Length != PARAMETERS_COUNT)
-                {
-                    throw new InvalidArgumentException("You do not have enought arguments");
-                }
+        private const int PARAMETERS_COUNT = 4;
 
-                string name = args[0];
-                //Проверка на отрицательные значение и удовлетворение параметрам треугольника
+        public static Triangle Validate(string[] args)
+        {
+            StringBuilder stringArgs = new StringBuilder();
+            foreach(string arg in args)
+            {
+                stringArgs.Append(arg);
+            }
+            
+            string pattern = @"\s+";
+            Regex regex = new Regex(pattern);
+            string result = regex.Replace(stringArgs.ToString(), string.Empty);
+            string[] parameters = result.Split(new char[] { ',' });
+            if (parameters.Length == 0)
+            {
+                throw new CommandLineException("Please, add arguments!");
+            }
+
+            if (parameters.Length != PARAMETERS_COUNT)
+            {
+                throw new CommandLineException("You do not have correct number of arguments!");
+            }
+
+            try
+            {
+                string name = parameters[0];
                 float a;
                 float b;
                 float c;
-                if (!float.TryParse(args[1], out a) | !float.TryParse(args[2], out b) | !float.TryParse(args[3], out c))
+                if (!float.TryParse(parameters[1], out a) | !float.TryParse(parameters[2], out b) | !float.TryParse(parameters[3], out c))
                 {
-                    throw new InvalidArgumentException("You arguments are not valid! Cannot conver to float! Check your input parameters!");
+                    throw new CommandLineException("You arguments are not valid! Cannot conver to float! Check your input parameters!");
                 }
 
-                return new Triangle(name, a, b, c);
+                return Triangle.Initialize(name, a, b, c);
+            }
+            catch (InvalidTriangleException exception)
+            {
+                throw new CommandLineException(exception.ToString());
             }
         }
 
-        public static Triangle Parse(string input)
+        public static Triangle Validate(string input)
         {
             string pattern = @"\s+";
             Regex regex = new Regex(pattern);
             string result = regex.Replace(input, string.Empty);
             string[] parameters = result.Split(new char[] { ',' });
-
-            try
+            if (parameters.Length > PARAMETERS_COUNT)
             {
-
-
-                if (parameters.Length > PARAMETERS_COUNT)
-                {
-                    throw new IncorrectNumberOFArgumentsException("Too many arguments! Please, enter the correct number of arguments!");
-                }
-                else if (parameters.Length < PARAMETERS_COUNT)
-                {
-                    throw new IncorrectNumberOFArgumentsException("You do not have enought arguments! Please, enter the correct number of arguments!");
-                }
+                throw new ArgumentException("Too many arguments! Please, enter the correct number of arguments!");
             }
-            catch (IncorrectNumberOFArgumentsException ex)
+
+            if (parameters.Length < PARAMETERS_COUNT)
             {
-                Console.WriteLine(ex);
-                return null;
+                throw new ArgumentException("You do not have enought arguments! Please, enter the correct number of arguments!");
             }
+            
             Triangle triangle;
             try
             {
-
-               
-
-                string name_parameter = parameters[0].ToLower();
-                string a_parameter = parameters[1].Replace(".", ",");
-                string b_parameter = parameters[2].Replace(".", ",");
-                string c_parameter = parameters[3].Replace(".", ",");
-
-                triangle = new Triangle(
-                    name_parameter,
-                    float.Parse(a_parameter),
-                    float.Parse(b_parameter),
-                    float.Parse(c_parameter));
-                if (float.Parse(a_parameter) <= 0 || float.Parse(c_parameter) <= 0 || float.Parse(c_parameter) <= 0)
-                {
-
-                    throw new WrongTriangleException("Triangle can not have negative value of sides! Check your input parameters!", triangle);
-                }
+                string parameterName = parameters[0].ToLower();
+                string parameterA = parameters[1].Replace(".", ",");
+                string parameterB = parameters[2].Replace(".", ",");
+                string parameterC = parameters[3].Replace(".", ",");
+                triangle = Triangle.Initialize(
+                    parameterName,
+                    float.Parse(parameterA),
+                    float.Parse(parameterB),
+                    float.Parse(parameterC));                
             }
-            catch (WrongTriangleException ex)
+            catch (InvalidTriangleException exception)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(exception.Message);
                 return null;
             }
-            catch
+            catch (FormatException)
             {
-                throw new InvalidArgumentException("Cannot conver to float! Check your input parameters!");
+                Console.WriteLine("Can not convert from float to double! Please, input correct parameters!");
+                return null;
             }
-            return triangle;
-        }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("Can not convert from float to double! Please, input correct parameters!");
+                return null;
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Can not convert from float to double! Please, input correct parameters!");
+                return null;
+            }
 
-        public static void ShowInstruction()
-        {
-            Console.WriteLine("Input parameters: name,length,length,length");
+            return triangle;
         }
     }
 }
