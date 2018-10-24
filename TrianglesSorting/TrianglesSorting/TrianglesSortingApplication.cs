@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="TrianglesSortingApplication.cs" company="Peretiatko Anastasiia">
+// Copyright (c) Peretiatko Anastasiia. All rights reserved.
+// </copyright>
+
+using System;
 using TriangleModel;
 
 namespace TrianglesSorting
@@ -16,15 +20,14 @@ namespace TrianglesSorting
         {
             try
             {
-                Triangle triangle = TriangleValidator.Validate(args);
+                Triangle triangle = TriangleParser.Parse(args);
                 this.triangles.Add(triangle);
 
-                bool keepOn = true;
-
-                while (keepOn)
+                string action;
+                do
                 {
                     Console.Write("Do you want to add one more triangle? (If you do, print \"y\" or \"yes\"): ");
-                    string action = Console.ReadLine().ToLower();
+                    action = Console.ReadLine().ToLower();
                     if (action == "y" || action == "yes")
                     {
                         triangle = this.GetData();
@@ -33,23 +36,21 @@ namespace TrianglesSorting
                             this.triangles.Add(triangle);
                         }
                     }
-                    else
-                    { 
-                        break;
-                    }
                 }
+                while (action == "y" || action == "yes");
 
                 Console.WriteLine("This is your list of triangles:");
                 ITrianglePrinter printer = new ConsoleTrianglePrinter();
                 this.triangles.Print(printer);
                 Console.WriteLine("This is your sorted list:");
-                this.triangles.Sort(new TrianglesComparerByAreaDESC());
+                this.triangles.Sort(new TrianglesComparerByAreaDesc());
                 this.triangles.Print(printer);
             }
-            catch (CommandLineException exception)
+            catch (ArgumentException exception)
             {
                 Console.WriteLine(exception.Message);
                 this.ShowInstruction();
+                Console.ReadKey();
                 return (int)ReturnCode.Error;
             }
 
@@ -62,7 +63,7 @@ namespace TrianglesSorting
             {
                 Console.WriteLine("Input data for one more triangle: ");
                 string input = Console.ReadLine().ToLower();
-                Triangle triangle = TriangleValidator.Validate(input);
+                Triangle triangle = TriangleParser.Parse(input);
                 return triangle;
             }
             catch (ArgumentException exception)

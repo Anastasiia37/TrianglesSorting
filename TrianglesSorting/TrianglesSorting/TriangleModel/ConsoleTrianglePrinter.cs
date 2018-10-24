@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="ConsoleTrianglePrinter.cs" company="Peretiatko Anastasiia">
+// Copyright (c) Peretiatko Anastasiia. All rights reserved.
+// </copyright>
+
+using System;
 
 namespace TriangleModel
 {

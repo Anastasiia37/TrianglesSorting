@@ -1,15 +1,19 @@
-﻿using System;
+﻿// <copyright file="TriangleParser.cs" company="Peretiatko Anastasiia">
+// Copyright (c) Peretiatko Anastasiia. All rights reserved.
+// </copyright>
+
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using TriangleModel;
 
 namespace TrianglesSorting
 {
-    public static class TriangleValidator
+    public static class TriangleParser
     {
         private const int PARAMETERS_COUNT = 4;
 
-        public static Triangle Validate(string[] args)
+        public static Triangle Parse(string[] args)
         {
             StringBuilder stringArgs = new StringBuilder();
             foreach(string arg in args)
@@ -23,12 +27,12 @@ namespace TrianglesSorting
             string[] parameters = result.Split(new char[] { ',' });
             if (parameters.Length == 0)
             {
-                throw new CommandLineException("Please, add arguments!");
+                throw new ArgumentNullException("Please, add arguments!");
             }
 
             if (parameters.Length != PARAMETERS_COUNT)
             {
-                throw new CommandLineException("You do not have correct number of arguments!");
+                throw new ArgumentException("You do not have correct number of arguments!");
             }
 
             try
@@ -39,18 +43,18 @@ namespace TrianglesSorting
                 float c;
                 if (!float.TryParse(parameters[1], out a) | !float.TryParse(parameters[2], out b) | !float.TryParse(parameters[3], out c))
                 {
-                    throw new CommandLineException("You arguments are not valid! Cannot conver to float! Check your input parameters!");
+                    throw new ArgumentException("You arguments are not valid! Cannot conver to float! Check your input parameters!");
                 }
 
                 return Triangle.Initialize(name, a, b, c);
             }
             catch (InvalidTriangleException exception)
             {
-                throw new CommandLineException(exception.ToString());
+                throw new ArgumentException(exception.ToString());
             }
         }
 
-        public static Triangle Validate(string input)
+        public static Triangle Parse(string input)
         {
             string pattern = @"\s+";
             Regex regex = new Regex(pattern);

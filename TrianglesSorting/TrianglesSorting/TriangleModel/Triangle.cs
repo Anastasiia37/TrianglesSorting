@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="Triangle.cs" company="Peretiatko Anastasiia">
+// Copyright (c) Peretiatko Anastasiia. All rights reserved.
+// </copyright>
+
+using System;
 
 namespace TriangleModel
 {
@@ -10,7 +14,6 @@ namespace TriangleModel
             this.A = a;
             this.B = b;
             this.C = c;
-            this.Area = this.GetArea();
         }
 
         public string Name
@@ -32,12 +35,6 @@ namespace TriangleModel
         }
 
         public float C
-        {
-            get;
-            private set;
-        }
-
-        public float Area
         {
             get;
             private set;
@@ -68,7 +65,7 @@ namespace TriangleModel
 
         public override string ToString()
         {
-            return "[Triangle " + this.Name + "]: " + string.Format("{0:0.##}", this.Area) + " сm";
+            return "[Triangle " + this.Name + "]: " + string.Format("{0:0.##}", this.GetArea()) + " сm";
         }
     }
 }

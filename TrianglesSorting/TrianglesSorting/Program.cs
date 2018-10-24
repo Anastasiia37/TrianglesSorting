@@ -1,9 +1,10 @@
-﻿using System;
-using TriangleModel;
+﻿// <copyright file="Program.cs" company="Peretiatko Anastasiia">
+// Copyright (c) Peretiatko Anastasiia. All rights reserved.
+// </copyright>
 
 namespace TrianglesSorting
 {
-    internal class Program
+    public class Program
     {
         public static int Main(string[] args)
         {

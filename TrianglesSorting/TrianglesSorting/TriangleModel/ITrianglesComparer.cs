@@ -1,4 +1,7 @@
-﻿using System;
+﻿// <copyright file="ITrianglesComparer.cs" company="Peretiatko Anastasiia">
+// Copyright (c) Peretiatko Anastasiia. All rights reserved.
+// </copyright>
+
 using System.Collections.Generic;
 
 namespace TriangleModel
